@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.crypto.presentation.ui.screens.homepageScreen.HomepageObserver
+import com.example.crypto.presentation.ui.screens.homepageScreen.HomepageScreen
 import com.example.crypto.presentation.ui.screens.homepageScreen.HomepageViewModel
 import com.example.crypto.presentation.ui.theme.CryptoTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CryptoTheme {
-
+                val viewModel = hiltViewModel<HomepageViewModel>()
+                HomepageScreen(viewModel.coinsState){}
             }
         }
     }
