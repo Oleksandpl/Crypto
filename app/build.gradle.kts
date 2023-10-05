@@ -25,11 +25,12 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -40,6 +41,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+
         compose = true
     }
     composeOptions {
@@ -53,6 +55,12 @@ android {
 }
 
 dependencies {
+
+    //Icons
+    implementation (libs.material.icons)
+
+    //Navigation
+    implementation(libs.compose.navigation)
 
     //Dagger-hilt
     implementation(libs.hilt.android)

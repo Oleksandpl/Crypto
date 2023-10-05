@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.crypto.common.Resource
+import com.example.crypto.di.GlobalState
+import com.example.crypto.domain.model.Coin
 import com.example.crypto.domain.use_case.GetCoinsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomepageViewModel @Inject constructor(
-    private val coinsUseCase: GetCoinsUseCase
+    private val coinsUseCase: GetCoinsUseCase,
+    private val detailsCoinState: GlobalState
 ) : ViewModel() {
     private val _coinsState: MutableState<CoinsState> = mutableStateOf(CoinsState())
     val coinsState: State<CoinsState> = _coinsState
@@ -23,11 +26,8 @@ class HomepageViewModel @Inject constructor(
         getCoins()
     }
 
-    fun observer(onClick: HomepageObserver) {
-        when (onClick) {
-            HomepageObserver.OnItemClick -> {
-            }
-        }
+    fun setDetailsCoinState(id: String) {
+        detailsCoinState.setDetailsIdState(id)
     }
 
     private fun getCoins() {
